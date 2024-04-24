@@ -77,21 +77,6 @@ class AuthController extends Controller
         ]);
     }
 
-    public function main(): View
-    {
-        return view('main');
-    }
-
-    public function myPage(): View
-    {
-        return view('myPage');
-    }
-
-    public function trips(): View
-    {
-        return view('trips');
-    }
-
     public function logout(): RedirectResponse
     {
         Session::flush();

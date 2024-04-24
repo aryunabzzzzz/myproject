@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -11,8 +12,8 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
 
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/main', [AuthController::class, 'main'])->name('main');
+Route::get('/main', [MainController::class, 'main'])->name('main');
 
-Route::get('/trips', [AuthController::class, 'trips'])->name('trips');
+Route::get('/trips', [MainController::class, 'trips'])->name('trips');
 
-Route::get('/myPage', [AuthController::class, 'myPage'])->name('myPage');
+Route::get('/myPage', [MainController::class, 'myPage'])->name('myPage');
