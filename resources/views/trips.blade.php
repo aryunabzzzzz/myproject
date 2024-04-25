@@ -4,6 +4,10 @@
 @endsection
 @section('content')
 
+    <h1>My Trips</h1>
+
+    <button class="btn btn-primary rounded-pill px-3" type="button"><a class="nav-link" href="{{ route('createTrip') }}">Add new</a></button>
+
     <div class="container px-4 py-5" id="custom-cards">
         <h2 class="pb-2 border-bottom">Custom cards</h2>
 

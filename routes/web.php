@@ -15,5 +15,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/main', [MainController::class, 'main'])->name('main');
 
 Route::get('/trips', [MainController::class, 'trips'])->name('trips');
+Route::get('/trips/create', [MainController::class, 'createTrip'])->name('createTrip');
 
 Route::get('/myPage', [MainController::class, 'myPage'])->name('myPage');
