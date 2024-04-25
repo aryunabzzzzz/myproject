@@ -39,7 +39,7 @@ class AuthController extends Controller
     public function postRegister(Request $request): RedirectResponse
     {
         $request->validate([
-            'nickname' => 'required',
+            'nickname' => 'required|unique:users',
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'gender' => 'nullable|string',
