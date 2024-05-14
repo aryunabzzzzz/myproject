@@ -5,7 +5,8 @@
 @section('content')
 
     <h1>Create a new trip</h1>
-    <form>
+    <form action="{{ route('postAddTrip') }}" method="POST">
+        @csrf
         <div class="mb-3">
             <label class="form-label">Name</label>
             <input type="text" class="form-control" id="name" name="name">
@@ -40,6 +41,13 @@
         </div>
         @if ($errors->has('status'))
             <span class="text-danger">{{ $errors->first('status') }}</span>
+        @endif
+        <div class="mb-3">
+            <label class="form-label">Photo</label>
+            <input type="text" class="form-control" id="photo" name="photo">
+        </div>
+        @if ($errors->has('photo'))
+            <span class="text-danger">{{ $errors->first('photo') }}</span>
         @endif
 
         <button type="submit" class="btn btn-success">Create</button>

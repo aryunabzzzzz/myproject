@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('photos', function (Blueprint $table) {
             $table->bigIncrements('id')->primary();
             $table->bigIncrements('trip_id');
+            $table->foreign('trip_id')
+                ->references('id')->on('trips')
+                ->onDelete('cascade');
             $table->text('img_url');
             $table->text('comment')->nullable();
         });

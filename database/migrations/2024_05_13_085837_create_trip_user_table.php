@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_trips', function (Blueprint $table) {
+        Schema::create('trip_user', function (Blueprint $table) {
             $table->bigIncrements('id')->primary();
-            $table->bigIncrements('user_id');
             $table->bigInteger('trip_id');
+            $table->bigIncrements('user_id');
+
+            $table->foreign('trip_id')->references('id')->on('trips');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_trips');
+        Schema::dropIfExists('trip_user');
     }
 };

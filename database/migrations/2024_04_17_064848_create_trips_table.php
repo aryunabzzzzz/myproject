@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('location');
             $table->text('description');
             $table->string('status');
+            $table->text('photo');
         });
     }
 
