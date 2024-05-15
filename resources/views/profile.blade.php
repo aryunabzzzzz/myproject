@@ -1,24 +1,24 @@
 @extends('layouts')
 @section('title')
-    {{$data->nickname}}
+    {{$user->nickname}}
 @endsection
 @section('content')
 
-    <h1>{{$data->nickname}}</h1>
+    <h1>{{$user->nickname}}</h1>
 
     <div class="container">
         <div class="row">
             <div class="col">
-                <img src="{{$data->img_url}}" width="300" height="300">
+                <img src="{{$user->img_url}}" width="300" height="300">
             </div>
 
             <div class="col">
-                <h3>{{$data->first_name}} {{$data->last_name}}</h3>
-                <h5>gender: {{$data->gender}}</h5>
-                <h5>birthday: {{$data->birthday}}</h5>
-                <h5>country: {{$data->country}}</h5>
-                <h5>city: {{$data->city}}</h5>
-                <h5>about me: {{$data->info}}</h5>
+                <h3>{{$user->first_name}} {{$user->last_name}}</h3>
+                <h5>gender: {{$user->gender}}</h5>
+                <h5>birthday: {{$user->birthday}}</h5>
+                <h5>country: {{$user->country}}</h5>
+                <h5>city: {{$user->city}}</h5>
+                <h5>about me: {{$user->info}}</h5>
             </div>
         </div>
     </div>

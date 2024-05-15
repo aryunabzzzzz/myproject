@@ -13,9 +13,8 @@ class TripController extends Controller
 {
     public function getAll(): View
     {
-        $id = Auth::id();
-        $users = User::find($id);
-        $trips = $users->trips;
+        $user = Auth::user();
+        $trips = $user->trips;
         return view('trips', ['trips' => $trips]);
     }
 
