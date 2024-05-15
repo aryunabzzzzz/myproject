@@ -20,9 +20,9 @@ class MainController extends Controller
 
     public function myPage(): View|RedirectResponse
     {
-            $user = Auth::user();
-            $trips = $user->trips;
-            return view('profile', ['user' => $user, 'trips' => $trips]);
+        $user = Auth::user();
+        $trips = $user->trips;
+        return view('profile', ['user' => $user, 'trips' => $trips]);
 
     }
 
