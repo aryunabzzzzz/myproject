@@ -20,15 +20,15 @@ class AuthController extends Controller
     public function postLogin(Request $request): View|RedirectResponse
     {
         $request->validate([
-            'email' => 'required',
-            'password' => 'required'
+            'email' => 'required|email',
+            'password' => 'required|min:8'
         ]);
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             return redirect('/myPage');
         }
-        return view('login');
+        return view('login')->withErrors(['email'=>'Invalid email or password.']);
     }
 
     public function register(): View
