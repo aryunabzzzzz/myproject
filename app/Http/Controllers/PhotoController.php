@@ -10,9 +10,10 @@ use Illuminate\View\View;
 
 class PhotoController extends Controller
 {
-    public function add(): View
+    public function add(int $id): View
     {
-        return view('addPhoto');
+        $trip_id = $id;
+        return view('addPhoto', ['trip_id' => $trip_id]);
     }
 
     public function postAdd(Request $request): RedirectResponse

@@ -5,7 +5,7 @@
 @section('content')
 
     <h1>{{$trip->name}}</h1>
-    <button class="btn btn-primary rounded-pill px-3" type="button"><a class="nav-link" href="{{ route('addPhoto') }}">Add photo</a></button>
+    <button class="btn btn-primary rounded-pill px-3" type="button"><a class="nav-link" href="/trip/{{$trip->id}}/addPhoto">Add photo</a></button>
 
     <hr class="featurette-divider">
 

@@ -22,13 +22,8 @@
             <span class="text-danger">{{ $errors->first('comment') }}</span>
         @endif
         <div class="mb-3">
-            <label class="form-label">Trip_id</label>
-            <input type="text" class="form-control" id="trip_id" name="trip_id">
+            <input type="hidden" class="form-control" id="trip_id" name="trip_id" value="{{$trip_id}}">
         </div>
-        @if ($errors->has('trip_id'))
-            <span class="text-danger">{{ $errors->first('trip_id') }}</span>
-        @endif
-
 
         <button type="submit" class="btn btn-success">Add photo</button>
     </form>

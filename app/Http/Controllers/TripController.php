@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Trip;
-use App\Models\TripUser;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -20,9 +19,9 @@ class TripController extends Controller
         return view('trips', ['trips' => $trips]);
     }
 
-    public function getOne(Request $request): View
+    public function getOne(int $id): View
     {
-        $trip_id = $request->get('trip_id');
+        $trip_id = $id;
         $trip = Trip::find($trip_id);
         $photos = $trip->photos;
 
@@ -47,7 +46,7 @@ class TripController extends Controller
 
         $data = $request->all();
         $trip = $this->create($data);
-        $user = User::find(Auth::id());
+        $user = Auth::user();
         $trip->users()->attach($user);
 
 

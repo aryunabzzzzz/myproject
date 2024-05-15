@@ -20,13 +20,10 @@ class MainController extends Controller
 
     public function myPage(): View|RedirectResponse
     {
-        if(Auth::check()){
             $id = Auth::id();
             $data = User::find($id);
             $trips = $data->trips;
             return view('profile', ['data' => $data, 'trips' => $trips]);
-        }
-        return redirect('/main');
 
     }
 
