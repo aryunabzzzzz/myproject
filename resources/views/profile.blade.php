@@ -24,6 +24,17 @@
                 <h5>city: {{$user->city}}</h5>
                 <h5>about me: {{$user->info}}</h5>
             </div>
+
+            @if($user->id==Auth::user()->id)
+                <div class="col">
+                    <button type="button" class="btn btn-outline-secondary"><a class="nav-link" href="#">Edit profile</a></button>
+                </div>
+            @else
+                <div class="col">
+                    <button type="button" class="btn btn-outline-secondary"><a class="nav-link" href="#">Follow</a></button>
+                </div>
+            @endif
+
         </div>
     </div>
 

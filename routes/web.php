@@ -25,4 +25,4 @@ Route::post('/trips/create', [TripController::class, 'postAdd'])->name('postAddT
 Route::get('/trip/{id}/addPhoto', [PhotoController::class, 'add'])->name('addPhoto')->middleware('auth');
 Route::post('/trip/addPhoto', [PhotoController::class, 'postAdd'])->name('postAddPhoto')->middleware('auth');
 
-Route::get('/myPage', [MainController::class, 'myPage'])->name('myPage')->middleware('auth');
+Route::get('/{nickname}', [MainController::class, 'profile'])->name('profile')->middleware('auth');
