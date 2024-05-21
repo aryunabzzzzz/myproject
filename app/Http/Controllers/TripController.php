@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class TripController extends Controller
@@ -44,10 +45,11 @@ class TripController extends Controller
         ]);
 
         $data = $request->all();
-        $trip = $this->create($data);
-        $user = Auth::user();
-        $trip->users()->attach($user);
-
+        DB::transaction(function () use ($data) {
+            $trip = $this->create($data);
+            $user = Auth::user();
+            $trip->users()->attach($user);
+        });
 
         return redirect('/trips');
     }
