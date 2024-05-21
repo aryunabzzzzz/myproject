@@ -24,20 +24,15 @@ class PhotoController extends Controller
         ]);
 
         $data = $request->all();
-        $photo = $this->create($data);
-//        $trip = Trip::find($data['trip_id']);
-//        $trip->photos()->save($photo);
 
+        $photo = new Photo();
+        $photo->img_url = $data['img_url'];
+        $photo->comment = $data['comment'];
+        $trip_id = $data['trip_id'];
+        $trip = Trip::find($trip_id);
+        $trip->photos()->save($photo);
 
-        return redirect('/trips');
+        return redirect("/trip/$trip_id");
     }
 
-    public function create(array $data)
-    {
-        return Photo::create([
-            'trip_id' => $data['trip_id'],
-            'img_url' => $data['img_url'],
-            'comment' => $data['comment']
-        ]);
-    }
 }
