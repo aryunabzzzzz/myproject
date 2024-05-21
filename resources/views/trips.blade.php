@@ -22,11 +22,9 @@
                             <ul class="d-flex list-unstyled mt-auto">
 
                                 <li class="d-flex align-items-center me-3">
-                                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
                                     <small>{{$trip->location}}</small>
                                 </li>
                                 <li class="d-flex align-items-center">
-                                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
                                     <small>{{$trip->date}}</small>
                                 </li>
                             </ul>

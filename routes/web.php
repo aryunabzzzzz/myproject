@@ -26,3 +26,11 @@ Route::get('/trip/{id}/addPhoto', [PhotoController::class, 'add'])->name('addPho
 Route::post('/trip/addPhoto', [PhotoController::class, 'postAdd'])->name('postAddPhoto')->middleware('auth');
 
 Route::get('/{nickname}', [MainController::class, 'profile'])->name('profile')->middleware('auth');
+
+Route::get('/{nickname}/edit', [MainController::class, 'edit'])->name('edit')->middleware('auth');
+Route::post('/{nickname}/edit', [MainController::class, 'postEdit'])->name('postEdit')->middleware('auth');
+
+
+Route::get('/search', [MainController::class, 'search'])->name('search')->middleware('auth');
+
+//Route::get('/{nickname}/trips', [TripController::class, 'getAll'])->name('trips')->middleware('auth');

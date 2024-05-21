@@ -26,7 +26,8 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect('/myPage');
+            $nickname = Auth::user()->nickname;
+            return redirect("/$nickname");
         }
         return view('login')->withErrors(['email'=>'Invalid email or password.']);
     }

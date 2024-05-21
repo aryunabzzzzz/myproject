@@ -27,11 +27,11 @@
 
             @if($user->id==Auth::user()->id)
                 <div class="col">
-                    <button type="button" class="btn btn-outline-secondary"><a class="nav-link" href="#">Edit profile</a></button>
+                    <button type="button" class="btn btn-outline-primary"><a class="nav-link" href="{{route('edit', ['nickname'=>Auth::user()->nickname])}}">Edit profile</a></button>
                 </div>
             @else
                 <div class="col">
-                    <button type="button" class="btn btn-outline-secondary"><a class="nav-link" href="#">Follow</a></button>
+                    <button type="button" class="btn btn-outline-primary"><a class="nav-link" href="#">Follow</a></button>
                 </div>
             @endif
 
@@ -52,11 +52,9 @@
                             <ul class="d-flex list-unstyled mt-auto">
 
                                 <li class="d-flex align-items-center me-3">
-                                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill"></use></svg>
                                     <small>{{$trip->location}}</small>
                                 </li>
                                 <li class="d-flex align-items-center">
-                                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3"></use></svg>
                                     <small>{{$trip->date}}</small>
                                 </li>
                             </ul>
