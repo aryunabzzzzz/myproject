@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TripController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,10 +26,10 @@ Route::post('/trips/create', [TripController::class, 'postAdd'])->name('postAddT
 Route::get('/trip/{id}/addPhoto', [PhotoController::class, 'add'])->name('addPhoto')->middleware('auth');
 Route::post('/trip/addPhoto', [PhotoController::class, 'postAdd'])->name('postAddPhoto')->middleware('auth');
 
-Route::get('/{nickname}', [MainController::class, 'profile'])->name('profile')->middleware('auth');
+Route::get('/{nickname}', [ProfileController::class, 'get'])->name('profile')->middleware('auth');
 
-Route::get('/{nickname}/edit', [MainController::class, 'edit'])->name('edit')->middleware('auth');
-Route::post('/{nickname}/edit', [MainController::class, 'postEdit'])->name('postEdit')->middleware('auth');
+Route::get('/{nickname}/edit', [ProfileController::class, 'edit'])->name('edit')->middleware('auth');
+Route::post('/{nickname}/edit', [ProfileController::class, 'postEdit'])->name('postEdit')->middleware('auth');
 
 
 Route::get('/search', [MainController::class, 'search'])->name('search')->middleware('auth');
