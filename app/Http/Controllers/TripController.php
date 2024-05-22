@@ -35,14 +35,7 @@ class TripController extends Controller
 
     public function postAdd(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'date' => 'required|string',
-            'location' => 'required|string',
-            'description' => 'required|string',
-            'status' => 'required|string',
-            'photo' => 'required|string',
-        ]);
+        $request->validate([]);
 
         $data = $request->all();
         $user = Auth::user();

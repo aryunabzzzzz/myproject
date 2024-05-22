@@ -18,10 +18,7 @@ class PhotoController extends Controller
 
     public function postAdd(Request $request): RedirectResponse
     {
-        $request->validate([
-            'img_url' => 'required|string',
-            'comment' => 'required|string'
-        ]);
+        $request->validate([]);
 
         $data = $request->all();
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -23,17 +24,9 @@ class ProfileController extends Controller
         return view('edit', ['user' => $user]);
     }
 
-    public function postEdit(Request $request): View|RedirectResponse
+    public function postEdit(ProfileRequest $request): View|RedirectResponse
     {
-        $request->validate([
-            'nickname' => 'required|unique:users',
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'img_url' => 'nullable|string',
-            'country' => 'nullable|string',
-            'city' => 'nullable|string',
-            'info' => 'nullable|string|max:255'
-        ]);
+        $request->validate([]);
 
         $data = $request->all();
 

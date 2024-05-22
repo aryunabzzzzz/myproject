@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegistrationRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -17,12 +18,9 @@ class AuthController extends Controller
         return view('login');
     }
 
-    public function postLogin(Request $request): View|RedirectResponse
+    public function postLogin(LoginRequest $request): View|RedirectResponse
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:8'
-        ]);
+        $request->validate([]);
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
@@ -37,22 +35,9 @@ class AuthController extends Controller
         return view('register');
     }
 
-    public function postRegister(Request $request): RedirectResponse
+    public function postRegister(RegistrationRequest $request): RedirectResponse
     {
-        $request->validate([
-            'nickname' => 'required|unique:users',
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'gender' => 'nullable|string',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|min:8|confirmed',
-            'birthday' => 'required',
-            'phone' => 'nullable|string',
-            'img_url' => 'nullable|string',
-            'country' => 'nullable|string',
-            'city' => 'nullable|string',
-            'info' => 'nullable|string|max:255'
-        ]);
+        $request->validate([]);
 
         $data = $request->all();
         $check = $this->create($data);
