@@ -16,6 +16,7 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/main', [MainController::class, 'main'])->name('main');
+Route::get('/search', [MainController::class, 'search'])->name('search');
 
 Route::get('/trips', [TripController::class, 'getAll'])->name('trips')->middleware('auth');
 Route::get('/trip/{id}', [TripController::class, 'getOne'])->name('trip')->middleware('auth');
@@ -30,8 +31,5 @@ Route::get('/{nickname}', [ProfileController::class, 'get'])->name('profile')->m
 
 Route::get('/{nickname}/edit', [ProfileController::class, 'edit'])->name('edit')->middleware('auth');
 Route::post('/{nickname}/edit', [ProfileController::class, 'postEdit'])->name('postEdit')->middleware('auth');
-
-
-Route::get('/search', [MainController::class, 'search'])->name('search')->middleware('auth');
 
 //Route::get('/{nickname}/trips', [TripController::class, 'getAll'])->name('trips')->middleware('auth');

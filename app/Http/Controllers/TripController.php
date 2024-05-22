@@ -45,9 +45,9 @@ class TripController extends Controller
         ]);
 
         $data = $request->all();
-        DB::transaction(function () use ($data) {
+        $user = Auth::user();
+        DB::transaction(function () use ($data, $user) {
             $trip = $this->create($data);
-            $user = Auth::user();
             $trip->users()->attach($user);
         });
 
