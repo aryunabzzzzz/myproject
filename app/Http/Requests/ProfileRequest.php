@@ -26,7 +26,8 @@ class ProfileRequest extends FormRequest
             'nickname' => ['required', Rule::unique('users')->ignore($this->user()->id)],
             'first_name' => 'required|string|min:2',
             'last_name' => 'required|string',
-            'img_url' => 'nullable|string',
+//            'img_url' => 'nullable|string',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'country' => 'nullable|string',
             'city' => 'nullable|string',
             'info' => 'nullable|string|max:255'

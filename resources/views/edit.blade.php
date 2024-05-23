@@ -6,8 +6,9 @@
     <h3>Edit profile</h3>
 
     <div class="card-body">
-        <form action="{{ route('postEdit', ['nickname'=>Auth::user()->nickname]) }}" method="POST">
+        <form action="{{ route('postEdit', ['nickname'=>Auth::user()->nickname]) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            <label>Nickname</label>
             <div class="form-group mb-3">
                 <input type="text" placeholder="Nickname" id="nickname" class="form-control" name="nickname"
                        required autofocus
@@ -16,6 +17,8 @@
                     <span class="text-danger">{{ $errors->first('nickname') }}</span>
                 @endif
             </div>
+
+            <label>First Name</label>
             <div class="form-group mb-3">
                 <input type="text" placeholder="First Name" id="first_name" class="form-control" name="first_name"
                        required autofocus
@@ -24,6 +27,8 @@
                     <span class="text-danger">{{ $errors->first('first_name') }}</span>
                 @endif
             </div>
+
+            <label>Last Name</label>
             <div class="form-group mb-3">
                 <input type="text" placeholder="Last Name" id="last_name" class="form-control" name="last_name"
                        required autofocus
@@ -32,14 +37,16 @@
                     <span class="text-danger">{{ $errors->first('last_name') }}</span>
                 @endif
             </div>
-            <div class="form-group mb-3">
-                <input type="text" placeholder="Image" id="img_url" class="form-control" name="img_url"
-                       autofocus
-                       value="{{Auth::user()->img_url}}">
-                @if ($errors->has('img_url'))
-                    <span class="text-danger">{{ $errors->first('img_url') }}</span>
+
+            <label>Avatar</label>
+            <div class="input-group mb-3">
+                <input type="file" class="form-control" id="avatar" name="avatar">
+                @if ($errors->has('avatar'))
+                    <span class="text-danger">{{ $errors->first('avatar') }}</span>
                 @endif
             </div>
+
+            <label>Country</label>
             <div class="form-group mb-3">
                 <input type="text" placeholder="Country" id="country" class="form-control" name="country"
                        autofocus
@@ -48,6 +55,8 @@
                     <span class="text-danger">{{ $errors->first('country') }}</span>
                 @endif
             </div>
+
+            <label>City</label>
             <div class="form-group mb-3">
                 <input type="text" placeholder="City" id="city" class="form-control" name="city"
                        autofocus
@@ -56,6 +65,8 @@
                     <span class="text-danger">{{ $errors->first('city') }}</span>
                 @endif
             </div>
+
+            <label>About me</label>
             <div class="form-group mb-3">
                 <input type="text" placeholder="About me" id="info" class="form-control" name="info"
                        autofocus

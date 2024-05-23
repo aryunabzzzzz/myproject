@@ -29,12 +29,17 @@ class ProfileController extends Controller
         $request->validate([]);
 
         $data = $request->all();
+        $image = $request->file('avatar');
+        $avatar = $this->uploadAvatar($image);
+
+        $img_url = asset("storage/$avatar");
+
 
         $user = Auth::user()->update([
             'nickname' => $data['nickname'],
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
-            'img_url' => $data['img_url'],
+            'img_url' => $img_url,
             'country' => $data['country'],
             'city' => $data['city'],
             'info' => $data['info']
@@ -43,4 +48,14 @@ class ProfileController extends Controller
         $nickname = Auth::user()->nickname;
         return redirect("/$nickname");
     }
+
+    public function uploadAvatar($image): string
+    {
+        $file = $image;
+        $user = Auth::user();
+        $user_id = $user->id;
+        $path = $file->storeAs("avatars/user{$user_id}", time().'.'.$file->getClientOriginalExtension());
+        return $path;
+    }
+
 }
