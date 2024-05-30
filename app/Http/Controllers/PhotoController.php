@@ -12,8 +12,7 @@ class PhotoController extends Controller
 {
     public function add(int $id): View
     {
-        $trip_id = $id;
-        return view('addPhoto', ['trip_id' => $trip_id]);
+        return view('addPhoto', ['tripId' => $id]);
     }
 
     public function postAdd(PhotoRequest $request): RedirectResponse
@@ -21,28 +20,25 @@ class PhotoController extends Controller
         $request->validate([]);
 
         $data = $request->all();
-        $image = $request->file('img_path');
+        $image = $request->file('imgPath');
 
-        $trip_id = $data['trip_id'];
-        $trip = Trip::find($trip_id);
+        $tripId = $data['tripId'];
+        $trip = Trip::find($tripId);
 
-        $image_path = $this->uploadPhoto($image, $trip_id);
+        $imagePath = $this->uploadPhoto($image, $tripId);
 
         $photo = new Photo();
-        $photo->img_path = $image_path;
+        $photo->img_path = $imagePath;
         $photo->comment = $data['comment'];
 
         $trip->photos()->save($photo);
 
-        return redirect("/trip/$trip_id");
+        return redirect("/trip/$tripId");
     }
 
     public function uploadPhoto($image, $tripId): string
     {
-        $file = $image;
-        $trip_id = $tripId;
-        $path = $file->storeAs("photo/trip{$trip_id}", time().'.'.$file->getClientOriginalExtension());
-        return $path;
+        return $image->store("photo/trip{$tripId}");
     }
 
 }

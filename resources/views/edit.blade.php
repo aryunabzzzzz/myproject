@@ -20,29 +20,29 @@
 
             <label>First Name</label>
             <div class="form-group mb-3">
-                <input type="text" placeholder="First Name" id="first_name" class="form-control" name="first_name"
+                <input type="text" placeholder="First Name" id="firstName" class="form-control" name="firstName"
                        required autofocus
                        value="{{Auth::user()->first_name}}">
-                @if ($errors->has('first_name'))
-                    <span class="text-danger">{{ $errors->first('first_name') }}</span>
+                @if ($errors->has('firstName'))
+                    <span class="text-danger">{{ $errors->first('firstName') }}</span>
                 @endif
             </div>
 
             <label>Last Name</label>
             <div class="form-group mb-3">
-                <input type="text" placeholder="Last Name" id="last_name" class="form-control" name="last_name"
+                <input type="text" placeholder="Last Name" id="lastName" class="form-control" name="lastName"
                        required autofocus
                        value="{{Auth::user()->last_name}}">
-                @if ($errors->has('last_name'))
-                    <span class="text-danger">{{ $errors->first('last_name') }}</span>
+                @if ($errors->has('lastName'))
+                    <span class="text-danger">{{ $errors->first('lastName') }}</span>
                 @endif
             </div>
 
             <label>Avatar</label>
             <div class="input-group mb-3">
-                <input type="file" class="form-control" id="avatar_path" name="avatar_path">
-                @if ($errors->has('avatar_path'))
-                    <span class="text-danger">{{ $errors->first('avatar_path') }}</span>
+                <input type="file" class="form-control" id="avatarPath" name="avatarPath">
+                @if ($errors->has('avatarPath'))
+                    <span class="text-danger">{{ $errors->first('avatarPath') }}</span>
                 @endif
             </div>
 

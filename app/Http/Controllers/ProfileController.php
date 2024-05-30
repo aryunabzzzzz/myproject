@@ -30,20 +30,21 @@ class ProfileController extends Controller
 
         $data = $request->all();
 
-        $image = $request->file('avatar_path');
-        $image_path = $this->uploadAvatar($image);
+        $image = $request->file('avatarPath');
+        $imagePath = $this->uploadAvatar($image);
 
         $user = Auth::user()->update([
             'username' => $data['username'],
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'avatar_path' => $image_path,
+            'first_name' => $data['firstName'],
+            'last_name' => $data['lastName'],
+            'avatar_path' => $imagePath,
             'country' => $data['country'],
             'city' => $data['city'],
             'info' => $data['info']
         ]);
 
         $username = Auth::user()->username;
+
         return redirect("/$username");
     }
 
@@ -52,12 +53,12 @@ class ProfileController extends Controller
         $file = $image;
 
         $user = Auth::user();
-        $user_id = $user->id;
+        $userId = $user->id;
         $oldImage = $user->avatar_path;
 
         if($file){
             $this->deleteAvatar($oldImage);
-            $path = $file->storeAs("avatars/user{$user_id}", time().'.'.$file->getClientOriginalExtension());
+            $path = $file->store("avatars/user{$userId}");
         } else {
             $path = $oldImage;
         }

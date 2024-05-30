@@ -14,7 +14,11 @@
             <div class="row g-0">
                 <div class="col-md-4">
                     <a class="navbar-brand mr-auto" href="{{ route('profile', ['username'=>$user->username]) }}">
-                        <img src="{{asset("storage/$user->avatar_path")}}" class="img-fluid rounded-start" alt="...">
+                        @if($user->avatar_path)
+                            <img src="{{asset("storage/$user->avatar_path")}}" class="img-fluid rounded-start" alt="...">
+                        @else
+                            <img src="https://miramirov.gosuslugi.ru/netcat_files/11/143/no_foto_1.png" class="img-fluid rounded-start" alt="...">
+                        @endif
                     </a>
                 </div>
                 <div class="col-md-8">

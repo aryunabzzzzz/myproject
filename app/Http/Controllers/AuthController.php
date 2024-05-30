@@ -41,12 +41,12 @@ class AuthController extends Controller
 
         $data = $request->all();
         $user = $this->create($data);
-        $user_id = $user->id;
+        $userId = $user->id;
 
-        $avatar = $request->file('avatar_path');
-        $avatar_path = $this->uploadAvatar($avatar, $user_id);
+        $avatar = $request->file('avatarPath');
+        $avatarPath = $this->uploadAvatar($avatar, $userId);
 
-        $user->avatar_path = $avatar_path;
+        $user->avatar_path = $avatarPath;
         $user->save();
 
         return redirect('/login');
@@ -56,8 +56,8 @@ class AuthController extends Controller
     {
         return User::create([
             'username' => $data['username'],
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
+            'first_name' => $data['firstName'],
+            'last_name' => $data['lastName'],
             'gender' => $data['gender'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -69,10 +69,9 @@ class AuthController extends Controller
         ]);
     }
 
-    public function uploadAvatar($avatar, $user_id): string
+    public function uploadAvatar($avatar, $userId): string
     {
-        $path = $avatar->storeAs("avatars/user{$user_id}", time().'.'.$avatar->getClientOriginalExtension());
-        return $path;
+        return $avatar->store("avatars/user{$userId}");
     }
 
     public function logout(): RedirectResponse

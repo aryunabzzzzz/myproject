@@ -20,8 +20,7 @@ class TripController extends Controller
 
     public function getOne(int $id): View
     {
-        $trip_id = $id;
-        $trip = Trip::find($trip_id);
+        $trip = Trip::find($id);
         $photos = $trip->photos;
 
         return view('trip', ['trip' => $trip, 'photos' => $photos]);
@@ -38,14 +37,14 @@ class TripController extends Controller
 
         $data = $request->all();
         $user = Auth::user();
-        $cover = $request->file('cover_path');
+        $cover = $request->file('coverPath');
 
         $trip = $this->create($data);
         $trip->users()->attach($user);
 
-        $trip_id = $trip->id;
-        $cover_path = $this->uploadPhoto($cover, $trip_id);
-        $trip->cover_path = $cover_path;
+        $tripId = $trip->id;
+        $coverPath = $this->uploadPhoto($cover, $tripId);
+        $trip->cover_path = $coverPath;
         $trip->save();
 
         $photos = $request->file('photos');
@@ -54,7 +53,7 @@ class TripController extends Controller
             $this->addPhoto($photo, $trip);
         }
 
-        return redirect("/trip/$trip_id");
+        return redirect("/trip/$tripId");
     }
 
     public function create(array $data)
@@ -70,18 +69,15 @@ class TripController extends Controller
 
     public function uploadPhoto($image, $tripId): string
     {
-        $file = $image;
-        $trip_id = $tripId;
-        $path = $file->store("photo/trip{$trip_id}");
-        return $path;
+        return $image->store("photo/trip{$tripId}");
     }
 
     public function addPhoto($image, $trip)
     {
-        $image_path = $this->uploadPhoto($image, $trip->id);
+        $imagePath = $this->uploadPhoto($image, $trip->id);
 
         $photo = new Photo();
-        $photo->img_path = $image_path;
+        $photo->img_path = $imagePath;
 
         $trip->photos()->save($photo);
     }

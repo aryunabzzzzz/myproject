@@ -23,14 +23,14 @@ class RegistrationRequest extends FormRequest
     {
         return [
             'username' => 'required|unique:users',
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
+            'firstName' => 'required|string',
+            'lastName' => 'required|string',
             'gender' => 'nullable|string',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|min:8|confirmed',
             'birthday' => 'required|date',
             'phone' => 'nullable|string',
-            'avatar_path' => 'nullable|image|mimes:jpeg,png,jpg',
+            'avatarPath' => 'nullable|image|mimes:jpeg,png,jpg',
             'country' => 'nullable|string',
             'city' => 'nullable|string',
             'info' => 'nullable|string|max:255'

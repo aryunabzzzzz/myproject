@@ -9,10 +9,10 @@
         @csrf
         <div class="mb-3">
             <label class="form-label">Image</label>
-            <input type="file" class="form-control" id="img_path" name="img_path">
+            <input type="file" class="form-control" id="imgPath" name="imgPath">
         </div>
-        @if ($errors->has('img_path'))
-            <span class="text-danger">{{ $errors->first('img_path') }}</span>
+        @if ($errors->has('imgPath'))
+            <span class="text-danger">{{ $errors->first('imgPath') }}</span>
         @endif
         <div class="mb-3">
             <label class="form-label">Comment</label>
@@ -22,7 +22,7 @@
             <span class="text-danger">{{ $errors->first('comment') }}</span>
         @endif
         <div class="mb-3">
-            <input type="hidden" class="form-control" id="trip_id" name="trip_id" value="{{$trip_id}}">
+            <input type="hidden" class="form-control" id="tripId" name="tripId" value="{{$tripId}}">
         </div>
 
         <button type="submit" class="btn btn-success">Add photo</button>

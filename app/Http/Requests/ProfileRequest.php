@@ -24,9 +24,9 @@ class ProfileRequest extends FormRequest
     {
         return [
             'username' => ['required', Rule::unique('users')->ignore($this->user()->id)],
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'avatar_path' => 'nullable|image|mimes:jpeg,png,jpg',
+            'firstName' => 'required|string',
+            'lastName' => 'required|string',
+            'avatarPath' => 'nullable|image|mimes:jpeg,png,jpg',
             'country' => 'nullable|string',
             'city' => 'nullable|string',
             'info' => 'nullable|string|max:255'
