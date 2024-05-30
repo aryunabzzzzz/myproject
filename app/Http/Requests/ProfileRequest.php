@@ -23,11 +23,10 @@ class ProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nickname' => ['required', Rule::unique('users')->ignore($this->user()->id)],
-            'first_name' => 'required|string|min:2',
+            'username' => ['required', Rule::unique('users')->ignore($this->user()->id)],
+            'first_name' => 'required|string',
             'last_name' => 'required|string',
-//            'img_url' => 'nullable|string',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'avatar_path' => 'nullable|image|mimes:jpeg,png,jpg',
             'country' => 'nullable|string',
             'city' => 'nullable|string',
             'info' => 'nullable|string|max:255'

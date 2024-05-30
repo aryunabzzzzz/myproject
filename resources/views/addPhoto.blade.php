@@ -5,14 +5,14 @@
 @section('content')
 
     <h1>Add photo</h1>
-    <form action="{{ route('postAddPhoto') }}" method="POST">
+    <form action="{{ route('postAddPhoto') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label class="form-label">Image</label>
-            <input type="text" class="form-control" id="img_url" name="img_url">
+            <input type="file" class="form-control" id="img_path" name="img_path">
         </div>
-        @if ($errors->has('img_url'))
-            <span class="text-danger">{{ $errors->first('img_url') }}</span>
+        @if ($errors->has('img_path'))
+            <span class="text-danger">{{ $errors->first('img_path') }}</span>
         @endif
         <div class="mb-3">
             <label class="form-label">Comment</label>

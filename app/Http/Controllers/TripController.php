@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TripRequest;
+use App\Models\Photo;
 use App\Models\Trip;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class TripController extends Controller
@@ -33,18 +32,29 @@ class TripController extends Controller
         return view('addTrip');
     }
 
-    public function postAdd(Request $request): RedirectResponse
+    public function postAdd(TripRequest $request): RedirectResponse
     {
         $request->validate([]);
 
         $data = $request->all();
         $user = Auth::user();
-        DB::transaction(function () use ($data, $user) {
-            $trip = $this->create($data);
-            $trip->users()->attach($user);
-        });
+        $cover = $request->file('cover_path');
 
-        return redirect('/trips');
+        $trip = $this->create($data);
+        $trip->users()->attach($user);
+
+        $trip_id = $trip->id;
+        $cover_path = $this->uploadPhoto($cover, $trip_id);
+        $trip->cover_path = $cover_path;
+        $trip->save();
+
+        $photos = $request->file('photos');
+
+        foreach ($photos as $photo) {
+            $this->addPhoto($photo, $trip);
+        }
+
+        return redirect("/trip/$trip_id");
     }
 
     public function create(array $data)
@@ -54,9 +64,26 @@ class TripController extends Controller
             'date' => $data['date'],
             'location' => $data['location'],
             'description' => $data['description'],
-            'status' => $data['status'],
-            'photo' => $data['photo']
+            'status' => $data['status']
         ]);
+    }
+
+    public function uploadPhoto($image, $tripId): string
+    {
+        $file = $image;
+        $trip_id = $tripId;
+        $path = $file->store("photo/trip{$trip_id}");
+        return $path;
+    }
+
+    public function addPhoto($image, $trip)
+    {
+        $image_path = $this->uploadPhoto($image, $trip->id);
+
+        $photo = new Photo();
+        $photo->img_path = $image_path;
+
+        $trip->photos()->save($photo);
     }
 
 }

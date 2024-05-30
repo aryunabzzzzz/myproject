@@ -5,7 +5,7 @@
 @section('content')
 
     <h1>Create a new trip</h1>
-    <form action="{{ route('postAddTrip') }}" method="POST">
+    <form action="{{ route('postAddTrip') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label class="form-label">Name</label>
@@ -43,11 +43,18 @@
             <span class="text-danger">{{ $errors->first('status') }}</span>
         @endif
         <div class="mb-3">
-            <label class="form-label">Photo</label>
-            <input type="text" class="form-control" id="photo" name="photo">
+            <label class="form-label">Cover photo</label>
+            <input type="file" class="form-control" id="cover_path" name="cover_path">
         </div>
-        @if ($errors->has('photo'))
-            <span class="text-danger">{{ $errors->first('photo') }}</span>
+        @if ($errors->has('cover_path'))
+            <span class="text-danger">{{ $errors->first('cover_path') }}</span>
+        @endif
+        <div class="mb-3">
+            <label class="form-label">Photos</label>
+            <input type="file" class="form-control" id="photos" name="photos[]" multiple>
+        </div>
+        @if ($errors->has('photos'))
+            <span class="text-danger">{{ $errors->first('photos') }}</span>
         @endif
 
         <button type="submit" class="btn btn-success">Create</button>

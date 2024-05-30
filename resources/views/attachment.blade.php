@@ -6,9 +6,13 @@
         @foreach($trips as $trip)
 
             <div class="col">
-                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('{{$trip->photo}}');">
+                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('{{asset("storage/$trip->cover_path")}}');">
                     <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                        <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold"><button type="button" class="btn btn-outline-light"><a class="nav-link" href="/trip/{{$trip->id}}">{{$trip->name}}</a></button></h3>
+                        <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">
+                            <button type="button" class="btn btn-outline-light">
+                                <a class="nav-link" href="/trip/{{$trip->id}}">{{$trip->name}}</a>
+                            </button>
+                        </h3>
                         <ul class="d-flex list-unstyled mt-auto">
 
                             <li class="d-flex align-items-center me-3">

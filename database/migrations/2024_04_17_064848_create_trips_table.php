@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('date');
             $table->string('location');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('status');
-            $table->text('photo');
+            $table->text('cover_path')->nullable();
         });
     }
 

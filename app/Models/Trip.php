@@ -21,7 +21,7 @@ class Trip extends Model
       'location',
       'description',
       'status',
-      'photo'
+      'cover_path'
     ];
 
     public function photos(): HasMany

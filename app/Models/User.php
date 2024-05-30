@@ -22,7 +22,7 @@ class User extends Authenticatable
     protected $table = 'users';
 
     protected $fillable = [
-        'nickname',
+        'username',
         'first_name',
         'last_name',
         'gender',
@@ -30,7 +30,7 @@ class User extends Authenticatable
         'password',
         'birthday',
         'phone',
-        'img_url',
+        'avatar_path',
         'country',
         'city',
         'info'

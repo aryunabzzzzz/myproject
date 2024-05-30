@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('trip_id')
                 ->references('id')->on('trips')
                 ->onDelete('cascade');
-            $table->text('img_url');
+            $table->text('img_path');
             $table->text('comment')->nullable();
         });
     }

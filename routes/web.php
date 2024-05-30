@@ -27,9 +27,8 @@ Route::post('/trips/create', [TripController::class, 'postAdd'])->name('postAddT
 Route::get('/trip/{id}/addPhoto', [PhotoController::class, 'add'])->name('addPhoto')->middleware('auth');
 Route::post('/trip/addPhoto', [PhotoController::class, 'postAdd'])->name('postAddPhoto')->middleware('auth');
 
-Route::get('/{nickname}', [ProfileController::class, 'get'])->name('profile')->middleware('auth');
+Route::get('/{username}', [ProfileController::class, 'get'])->name('profile')->middleware('auth');
 
-Route::get('/{nickname}/edit', [ProfileController::class, 'edit'])->name('edit')->middleware('auth');
-Route::post('/{nickname}/edit', [ProfileController::class, 'postEdit'])->name('postEdit')->middleware('auth');
+Route::get('/{username}/edit', [ProfileController::class, 'edit'])->name('edit')->middleware('auth');
+Route::post('/{username}/edit', [ProfileController::class, 'postEdit'])->name('postEdit')->middleware('auth');
 
-//Route::get('/{nickname}/trips', [TripController::class, 'getAll'])->name('trips')->middleware('auth');

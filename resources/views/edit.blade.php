@@ -6,15 +6,15 @@
     <h3>Edit profile</h3>
 
     <div class="card-body">
-        <form action="{{ route('postEdit', ['nickname'=>Auth::user()->nickname]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('postEdit', ['username'=>Auth::user()->username]) }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <label>Nickname</label>
+            <label>Username</label>
             <div class="form-group mb-3">
-                <input type="text" placeholder="Nickname" id="nickname" class="form-control" name="nickname"
+                <input type="text" placeholder="Username" id="username" class="form-control" name="username"
                        required autofocus
-                       value="{{Auth::user()->nickname}}">
-                @if ($errors->has('nickname'))
-                    <span class="text-danger">{{ $errors->first('nickname') }}</span>
+                       value="{{Auth::user()->username}}">
+                @if ($errors->has('username'))
+                    <span class="text-danger">{{ $errors->first('username') }}</span>
                 @endif
             </div>
 
@@ -40,9 +40,9 @@
 
             <label>Avatar</label>
             <div class="input-group mb-3">
-                <input type="file" class="form-control" id="avatar" name="avatar">
-                @if ($errors->has('avatar'))
-                    <span class="text-danger">{{ $errors->first('avatar') }}</span>
+                <input type="file" class="form-control" id="avatar_path" name="avatar_path">
+                @if ($errors->has('avatar_path'))
+                    <span class="text-danger">{{ $errors->first('avatar_path') }}</span>
                 @endif
             </div>
 
@@ -79,7 +79,7 @@
                 @endif
             </div>
                 <button type="submit" class="btn btn-primary">Save changes</button>
-                <button type="button" class="btn btn-secondary"><a class="nav-link" href="{{ route('profile', ['nickname'=>Auth::user()->nickname]) }}">Cancel</a></button>
+                <button type="button" class="btn btn-secondary"><a class="nav-link" href="{{ route('profile', ['username'=>Auth::user()->username]) }}">Cancel</a></button>
         </form>
     </div>
 

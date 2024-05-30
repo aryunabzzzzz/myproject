@@ -23,7 +23,7 @@ class MainController extends Controller
             return redirect()->back();
         }
 
-        $users = User::where('nickname', 'like', $search . '%')->get();
+        $users = User::where('username', 'like', $search . '%')->get();
         return view('search', ['search' => $search], ['users' => $users]);
     }
 

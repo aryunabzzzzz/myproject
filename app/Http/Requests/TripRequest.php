@@ -27,7 +27,8 @@ class TripRequest extends FormRequest
             'location' => 'required|string',
             'description' => 'required|string',
             'status' => 'required|string',
-            'photo' => 'required|string',
+            'cover_path' => 'nullable|image|mimes:jpeg,png,jpg',
+            'photos.*' => 'image|mimes:jpeg,png,jpg',
         ];
     }
 }

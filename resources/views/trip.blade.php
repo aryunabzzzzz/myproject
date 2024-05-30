@@ -15,7 +15,7 @@
             <p class="lead">{{$trip->description}}</p>
         </div>
         <div class="col-md-5 order-md-1">
-            <img src="{{$trip->photo}}" width="500" height="500">
+            <img src="{{asset("storage/$trip->cover_path")}}" width="500" height="500">
         </div>
     </div>
 
@@ -23,7 +23,7 @@
         <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
             @foreach($photos as $photo)
                 <div class="card" style="...">
-                    <img src="{{$photo->img_url}}" class="card-img-top" alt="...">
+                    <img src="{{asset("storage/$photo->img_path")}}" class="card-img-top" alt="...">
                     <div class="card-body">
                     <p class="card-text">{{$photo->comment}}</p>
                     </div>

@@ -22,8 +22,8 @@ class PhotoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'img_url' => 'required|string',
-            'comment' => 'required|string'
+            'img_path' => 'required|image|mimes:jpeg,png,jpg',
+            'comment' => 'nullable|string'
         ];
     }
 }

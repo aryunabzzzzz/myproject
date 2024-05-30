@@ -14,7 +14,7 @@ class Photo extends Model
 
     protected $fillable = [
         'trip_id',
-        'img_url',
+        'img_path',
         'comment'
     ];
 

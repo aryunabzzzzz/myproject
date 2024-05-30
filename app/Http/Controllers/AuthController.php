@@ -24,8 +24,8 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            $nickname = Auth::user()->nickname;
-            return redirect("/$nickname");
+            $username = Auth::user()->username;
+            return redirect("/$username");
         }
         return view('login')->withErrors(['email'=>'Invalid email or password.']);
     }
@@ -40,7 +40,14 @@ class AuthController extends Controller
         $request->validate([]);
 
         $data = $request->all();
-        $check = $this->create($data);
+        $user = $this->create($data);
+        $user_id = $user->id;
+
+        $avatar = $request->file('avatar_path');
+        $avatar_path = $this->uploadAvatar($avatar, $user_id);
+
+        $user->avatar_path = $avatar_path;
+        $user->save();
 
         return redirect('/login');
     }
@@ -48,7 +55,7 @@ class AuthController extends Controller
     public function create(array $data)
     {
         return User::create([
-            'nickname' => $data['nickname'],
+            'username' => $data['username'],
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'gender' => $data['gender'],
@@ -56,11 +63,16 @@ class AuthController extends Controller
             'password' => Hash::make($data['password']),
             'birthday' => $data['birthday'],
             'phone' => $data['phone'],
-            'img_url' => $data['img_url'],
             'country' => $data['country'],
             'city' => $data['city'],
             'info' => $data['info']
         ]);
+    }
+
+    public function uploadAvatar($avatar, $user_id): string
+    {
+        $path = $avatar->storeAs("avatars/user{$user_id}", time().'.'.$avatar->getClientOriginalExtension());
+        return $path;
     }
 
     public function logout(): RedirectResponse

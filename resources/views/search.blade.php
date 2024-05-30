@@ -13,15 +13,15 @@
         <div class="card mb-3" style="width: 400px;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <a class="navbar-brand mr-auto" href="{{ route('profile', ['nickname'=>$user->nickname]) }}">
-                        <img src="{{$user->img_url}}" class="img-fluid rounded-start" alt="...">
+                    <a class="navbar-brand mr-auto" href="{{ route('profile', ['username'=>$user->username]) }}">
+                        <img src="{{asset("storage/$user->avatar_path")}}" class="img-fluid rounded-start" alt="...">
                     </a>
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <a class="navbar-brand mr-auto" href="{{ route('profile', ['nickname'=>$user->nickname]) }}">
-                                {{$user->nickname}}
+                            <a class="navbar-brand mr-auto" href="{{ route('profile', ['username'=>$user->username]) }}">
+                                {{$user->username}}
                             </a>
                         </h5>
                         <p class="card-text">{{$user->first_name}} {{$user->last_name}}</p>

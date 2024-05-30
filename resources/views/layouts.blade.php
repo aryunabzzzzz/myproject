@@ -10,7 +10,7 @@
         @guest
             <a class="navbar-brand mr-auto" href="{{ route('main') }}">My Journey</a>
         @else
-            <a class="navbar-brand mr-auto" href="{{ route('profile', ['nickname'=>Auth::user()->nickname]) }}">My Journey</a>
+            <a class="navbar-brand mr-auto" href="{{ route('profile', ['username'=>Auth::user()->username]) }}">My Journey</a>
         @endguest
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

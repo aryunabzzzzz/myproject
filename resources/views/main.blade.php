@@ -12,11 +12,11 @@
 
             <div class="row featurette">
                 <div class="col-md-7">
-                    <h2 class="featurette-heading fw-normal lh-1">Вдохновляйся и вдохновляй <span class="text-body-secondary">It’ll blow your mind.</span></h2>
-                    <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
+                    <h2 class="featurette-heading fw-normal lh-1">Share your impressions!</h2>
+                    <p class="lead">text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text.</p>
                 </div>
                 <div class="col-md-5">
-                    <img src="https://sun9-34.userapi.com/impg/aNvMSj27g_DPKQMseca6zTGmdXuvzd8wwHV70w/u0lA2pb3Cyo.jpg?size=1332x1332&quality=95&sign=d69a35055b76c871d5a868e87fdb5de0&type=album" width="500" height="500">
+                    <img src="https://turizm.pibig.info/uploads/posts/2023-04/thumbs/1682325110_turizm-pibig-info-p-estetika-puteshestvii-turizm-instagram-38.jpg" width="500" height="500">
                 </div>
             </div>
 
@@ -24,11 +24,11 @@
 
             <div class="row featurette">
                 <div class="col-md-7 order-md-2">
-                    <h2 class="featurette-heading fw-normal lh-1">Найди людей разделяющих твои интересы <span class="text-body-secondary">Планируйте вместе. </span></h2>
-                    <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
+                    <h2 class="featurette-heading fw-normal lh-1">Plan trips with friends</h2>
+                    <p class="lead">text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text</p>
                 </div>
                 <div class="col-md-5 order-md-1">
-                    <img src="https://sun9-34.userapi.com/impg/aNvMSj27g_DPKQMseca6zTGmdXuvzd8wwHV70w/u0lA2pb3Cyo.jpg?size=1332x1332&quality=95&sign=d69a35055b76c871d5a868e87fdb5de0&type=album" width="500" height="500">
+                    <img src="https://kartinki.pics/uploads/posts/2022-12/1670531862_1-kartinkin-net-p-puteshestvenniki-kartinki-pinterest-1.jpg" width="500" height="500">
                 </div>
             </div>
 
@@ -36,11 +36,11 @@
 
             <div class="row featurette">
                 <div class="col-md-7">
-                    <h2 class="featurette-heading fw-normal lh-1">Делись опытом <span class="text-body-secondary">Checkmate.</span></h2>
-                    <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
+                    <h2 class="featurette-heading fw-normal lh-1">Create your own story</h2>
+                    <p class="lead">text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text</p>
                 </div>
                 <div class="col-md-5">
-                    <img src="https://sun9-34.userapi.com/impg/aNvMSj27g_DPKQMseca6zTGmdXuvzd8wwHV70w/u0lA2pb3Cyo.jpg?size=1332x1332&quality=95&sign=d69a35055b76c871d5a868e87fdb5de0&type=album" width="500" height="500">
+                    <img src="https://trikky.ru/wp-content/blogs.dir/1/files/2020/11/01/b4550a22-6e2f-478c-8d4a-2075d025cc01.jpeg" width="500" height="500">
                 </div>
             </div>
 
@@ -56,8 +56,12 @@
             <div class="col-lg-6 mx-auto">
                 <p class="lead mb-4">Join us and share your experience with others!</p>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    <button type="button" class="btn btn-primary btn-lg px-4 gap-3"><a class="nav-link" href="{{ route('register') }}">Register</a></button>
-                    <button type="button" class="btn btn-outline-secondary btn-lg px-4"><a class="nav-link" href="{{ route('login') }}">LogIn</a></button>
+                    <button type="button" class="btn btn-primary btn-lg px-4 gap-3">
+                        <a class="nav-link" href="{{ route('register') }}">Register</a>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">
+                        <a class="nav-link" href="{{ route('login') }}">LogIn</a>
+                    </button>
                 </div>
             </div>
         </div>
