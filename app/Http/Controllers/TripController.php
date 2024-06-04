@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TripRequest;
+use App\Models\Comment;
 use App\Models\Photo;
 use App\Models\Trip;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class TripController extends Controller
 {
-    public function getAll(): View
+    public function getAll(string $username): View
     {
-        $user = Auth::user();
+        $user = User::where('username', $username)->firstOrFail();
         $trips = $user->trips;
         return view('trips', ['trips' => $trips]);
     }
@@ -49,8 +52,10 @@ class TripController extends Controller
 
         $photos = $request->file('photos');
 
-        foreach ($photos as $photo) {
-            $this->addPhoto($photo, $trip);
+        if($photos){
+            foreach ($photos as $photo) {
+                $this->addPhoto($photo, $trip);
+            }
         }
 
         return redirect("/trip/$tripId");
@@ -80,6 +85,25 @@ class TripController extends Controller
         $photo->img_path = $imagePath;
 
         $trip->photos()->save($photo);
+    }
+
+    public function addComment(int $tripId, Request $request)
+    {
+//        $request->validate([]);
+        $data = $request->all();
+
+        $trip = Trip::find($tripId);
+
+        $comment = new Comment();
+        //вот тут надо что-то с датой сделать
+        $comment->date = '2000-01-01';
+
+        $comment->commentator_id = Auth::user()->id;
+        $comment->comment = $data['comment'];
+
+        $trip->comments()->save($comment);
+
+        return redirect("/trip/$tripId");
     }
 
 }

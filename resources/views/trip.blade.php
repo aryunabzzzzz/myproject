@@ -32,5 +32,7 @@
         </div>
     </div>
 
+    @include('comments', ['status' => 'complete'])
+
 
 @endsection

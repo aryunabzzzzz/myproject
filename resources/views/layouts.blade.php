@@ -33,7 +33,7 @@
                         <a class="nav-link" href="{{ route('followings', ['username'=>Auth::user()->username]) }}">Following</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('trips') }}">MyTrips</a>
+                        <a class="nav-link" href="{{ route('trips', ['username'=>Auth::user()->username]) }}">MyTrips</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}">LogOut</a>
