@@ -63,4 +63,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Trip::class);
     }
+
+    public function followings(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'friends', 'follower_id', 'following_id');
+    }
+
+    public function followers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'friends', 'following_id', 'follower_id');
+    }
 }

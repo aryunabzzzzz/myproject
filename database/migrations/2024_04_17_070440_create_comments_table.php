@@ -17,6 +17,9 @@ return new class extends Migration
             $table->bigIncrements('trip_id');
             $table->bigIncrements('commentator_id');
             $table->text('comment');
+
+            $table->foreign('trip_id')->references('id')->on('trips')->onDelete('cascade');
+            $table->foreign('commentator_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

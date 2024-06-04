@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FriendController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProfileController;
@@ -32,3 +33,8 @@ Route::get('/{username}', [ProfileController::class, 'get'])->name('profile')->m
 Route::get('/{username}/edit', [ProfileController::class, 'edit'])->name('edit')->middleware('auth');
 Route::post('/{username}/edit', [ProfileController::class, 'postEdit'])->name('postEdit')->middleware('auth');
 
+Route::get('/{username}/follow', [FriendController::class, 'follow'])->name('follow')->middleware('auth');
+Route::get('/{username}/unfollow', [FriendController::class, 'unfollow'])->name('unfollow')->middleware('auth');
+
+Route::get('/{username}/followers', [FriendController::class, 'getFollowers'])->name('followers')->middleware('auth');
+Route::get('/{username}/followings', [FriendController::class, 'getFollowings'])->name('followings')->middleware('auth');

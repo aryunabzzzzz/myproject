@@ -31,9 +31,17 @@
                         <a class="nav-link" href="{{route('edit', ['username'=>Auth::user()->username])}}">Edit profile</a>
                     </button>
                 </div>
+            @elseif(Auth::user()->followings->contains($user->id))
+                <div class="col">
+                    <button type="button" class="btn btn-outline-primary">
+                        <a class="nav-link" href="{{ route('unfollow', ['username'=>$user->username]) }}">Unfollow</a>
+                    </button>
+                </div>
             @else
                 <div class="col">
-                    <button type="button" class="btn btn-outline-primary"><a class="nav-link" href="#">Follow</a></button>
+                    <button type="button" class="btn btn-outline-primary">
+                        <a class="nav-link" href="{{ route('follow', ['username'=>$user->username]) }}">Follow</a>
+                    </button>
                 </div>
             @endif
 

@@ -27,10 +27,10 @@
                     </li>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Followers</a>
+                        <a class="nav-link" href="{{ route('followers', ['username'=>Auth::user()->username]) }}">Followers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Following</a>
+                        <a class="nav-link" href="{{ route('followings', ['username'=>Auth::user()->username]) }}">Following</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('trips') }}">MyTrips</a>

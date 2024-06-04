@@ -15,6 +15,10 @@ return new class extends Migration
             $table->bigIncrements('id')->primary();
             $table->bigIncrements('follower_id');
             $table->bigIncrements('following_id');
+
+            $table->foreign('follower_id')->references('id')->on('users');
+            $table->foreign('following_id')->references('id')->on('users');
+            $table->unique(['follower_id', 'following_id']);
         });
     }
 
