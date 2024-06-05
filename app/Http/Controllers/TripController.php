@@ -95,10 +95,8 @@ class TripController extends Controller
         $trip = Trip::find($tripId);
 
         $comment = new Comment();
-        //вот тут надо что-то с датой сделать
-        $comment->date = '2000-01-01';
 
-        $comment->commentator_id = Auth::user()->id;
+        $comment->author_id = Auth::user()->id;
         $comment->comment = $data['comment'];
 
         $trip->comments()->save($comment);

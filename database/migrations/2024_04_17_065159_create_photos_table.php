@@ -19,6 +19,8 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->text('img_path');
             $table->text('comment')->nullable();
+
+            $table->timestamps();
         });
     }
 

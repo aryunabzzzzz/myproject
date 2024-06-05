@@ -19,6 +19,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('status');
             $table->text('cover_path')->nullable();
+
+            $table->timestamps();
         });
     }
 

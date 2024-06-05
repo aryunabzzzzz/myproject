@@ -10,12 +10,11 @@ class Comment extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
-        'date',
         'trip_id',
-        'commentator_id',
+        'author_id',
         'comment'
     ];
 
@@ -24,8 +23,8 @@ class Comment extends Model
         return $this->belongsTo(Trip::class);
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'commentator_id');
+        return $this->belongsTo(User::class, 'author_id');
     }
 }

@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreign('follower_id')->references('id')->on('users');
             $table->foreign('following_id')->references('id')->on('users');
             $table->unique(['follower_id', 'following_id']);
+
+            $table->timestamps();
         });
     }
 

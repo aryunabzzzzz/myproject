@@ -1,11 +1,11 @@
 @foreach($trip->comments as $comment)
-    <h5 class="card-title">{{$comment->user->username}}</h5>
+    <h5 class="card-title">{{$comment->author->username}}</h5>
     <div class="card mb-3">
         <div class="card-body">
             <p class="card-text">{{$comment->comment}}</p>
         </div>
     </div>
-    <h6 class="card-subtitle mb-2 text-body-secondary">{{$comment->date}}</h6>
+    <h6 class="card-subtitle mb-2 text-body-secondary">{{$comment->created_at}}</h6>
 @endforeach
 
 
