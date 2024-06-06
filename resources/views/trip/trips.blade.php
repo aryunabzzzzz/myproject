@@ -8,6 +8,6 @@
 
     <button class="btn btn-primary rounded-pill px-3" type="button"><a class="nav-link" href="{{ route('addTrip') }}">Add new</a></button>
 
-    @include('attachment', ['status' => 'complete'])
+    @include('trip/attachment', ['status' => 'complete'])
 
 @endsection

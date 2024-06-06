@@ -16,6 +16,9 @@
     <div class="form-floating mb-3">
         <textarea class="form-control" placeholder="Leave a comment here" id="comment" name="comment" style="height: 100px"></textarea>
         <label for="floatingTextarea2">Comments</label>
+        @if ($errors->has('comment'))
+            <span class="text-danger">{{ $errors->first('comment') }}</span>
+        @endif
     </div>
 
     <div class="d-grid mx-auto mb-3">

@@ -12,7 +12,7 @@ class PhotoController extends Controller
 {
     public function add(int $id): View
     {
-        return view('addPhoto', ['tripId' => $id]);
+        return view('photo/addPhoto', ['tripId' => $id]);
     }
 
     public function postAdd(PhotoRequest $request): RedirectResponse
@@ -36,7 +36,8 @@ class PhotoController extends Controller
         return redirect("/trip/$tripId");
     }
 
-    public function uploadPhoto($image, $tripId): string
+    //добавить тип данных для аватара (File?)
+    public function uploadPhoto($image, int $tripId): string
     {
         return $image->store("photo/trip{$tripId}");
     }

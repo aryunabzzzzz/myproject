@@ -15,7 +15,7 @@ class AuthController extends Controller
 {
     public function login(): View
     {
-        return view('login');
+        return view('auth/login');
     }
 
     public function postLogin(LoginRequest $request): View|RedirectResponse
@@ -27,29 +27,33 @@ class AuthController extends Controller
             $username = Auth::user()->username;
             return redirect("/$username");
         }
-        return view('login')->withErrors(['email'=>'Invalid email or password.']);
+        return view('auth/login')->withErrors(['email'=>'Invalid email or password.']);
     }
 
     public function register(): View
     {
-        return view('register');
+        return view('auth/register');
     }
 
     public function postRegister(RegistrationRequest $request): RedirectResponse
     {
         $request->validate([]);
-
         $data = $request->all();
+
+        //добавить try catch
         $user = $this->create($data);
         $userId = $user->id;
 
-        $avatar = $request->file('avatarPath');
-        $avatarPath = $this->uploadAvatar($avatar, $userId);
+        if($request->hasFile('avatarPath')){
 
-        $user->avatar_path = $avatarPath;
-        $user->save();
+            $avatar = $request->file('avatarPath');
+            $avatarPath = $this->uploadAvatar($avatar, $userId);
 
-        return redirect('/login');
+            $user->avatar_path = $avatarPath;
+            $user->save();
+        }
+
+        return redirect("/registrationMail/$user->username");
     }
 
     public function create(array $data)
@@ -69,7 +73,9 @@ class AuthController extends Controller
         ]);
     }
 
-    public function uploadAvatar($avatar, $userId): string
+
+    //добавить тип данных для аватара (File?)
+    public function uploadAvatar($avatar, int $userId): string
     {
         return $avatar->store("avatars/user{$userId}");
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentRequest;
 use App\Http\Requests\TripRequest;
 use App\Models\Comment;
 use App\Models\Photo;
@@ -18,7 +19,7 @@ class TripController extends Controller
     {
         $user = User::where('username', $username)->firstOrFail();
         $trips = $user->trips;
-        return view('trips', ['trips' => $trips]);
+        return view('trip/trips', ['trips' => $trips]);
     }
 
     public function getOne(int $id): View
@@ -26,12 +27,12 @@ class TripController extends Controller
         $trip = Trip::find($id);
         $photos = $trip->photos;
 
-        return view('trip', ['trip' => $trip, 'photos' => $photos]);
+        return view('trip/trip', ['trip' => $trip, 'photos' => $photos]);
     }
 
     public function add(): View
     {
-        return view('addTrip');
+        return view('trip/addTrip');
     }
 
     public function postAdd(TripRequest $request): RedirectResponse
@@ -72,12 +73,14 @@ class TripController extends Controller
         ]);
     }
 
-    public function uploadPhoto($image, $tripId): string
+    //добавить тип данных для image (File?)
+    public function uploadPhoto($image, int $tripId): string
     {
         return $image->store("photo/trip{$tripId}");
     }
 
-    public function addPhoto($image, $trip)
+    //добавить тип данных для аватара (File?)
+    public function addPhoto($image, Trip $trip): void
     {
         $imagePath = $this->uploadPhoto($image, $trip->id);
 
@@ -87,9 +90,10 @@ class TripController extends Controller
         $trip->photos()->save($photo);
     }
 
-    public function addComment(int $tripId, Request $request)
+    public function addComment(int $tripId, CommentRequest $request): RedirectResponse
     {
-//        $request->validate([]);
+        $request->validate([]);
+
         $data = $request->all();
 
         $trip = Trip::find($tripId);

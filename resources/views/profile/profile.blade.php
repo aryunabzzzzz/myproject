@@ -48,6 +48,6 @@
         </div>
     </div>
 
-    @include('attachment', ['status' => 'complete'])
+    @include('trip/attachment', ['status' => 'complete'])
 
 @endsection

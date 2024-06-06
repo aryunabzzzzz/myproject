@@ -15,13 +15,13 @@ class ProfileController extends Controller
     {
         $user = User::where('username', $username)->firstOrFail();
         $trips = $user->trips;
-        return view('profile', ['user' => $user, 'trips' => $trips]);
+        return view('profile/profile', ['user' => $user, 'trips' => $trips]);
     }
 
     public function edit(string $username): View
     {
         $user = User::where('username', $username)->firstOrFail();
-        return view('edit', ['user' => $user]);
+        return view('profile/edit', ['user' => $user]);
     }
 
     public function postEdit(ProfileRequest $request): View|RedirectResponse
@@ -48,6 +48,7 @@ class ProfileController extends Controller
         return redirect("/$username");
     }
 
+    //добавить тип данных для аватара (File?)
     public function uploadAvatar($image): string
     {
         $file = $image;
@@ -65,7 +66,7 @@ class ProfileController extends Controller
         return $path;
     }
 
-    public function deleteAvatar($path)
+    public function deleteAvatar(string $path): void
     {
         if ($path){
             Storage::delete($path);

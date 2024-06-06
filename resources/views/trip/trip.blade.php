@@ -5,7 +5,11 @@
 @section('content')
 
     <h1>{{$trip->name}}</h1>
-    <button class="btn btn-primary rounded-pill px-3" type="button"><a class="nav-link" href="/trip/{{$trip->id}}/addPhoto">Add photo</a></button>
+    @if($trip->users->contains(Auth::user()->id))
+        <button class="btn btn-primary rounded-pill px-3" type="button">
+            <a class="nav-link" href="/trip/{{$trip->id}}/addPhoto">Add photo</a>
+        </button>
+    @endif
 
     <hr class="featurette-divider">
 
@@ -32,7 +36,7 @@
         </div>
     </div>
 
-    @include('comments', ['status' => 'complete'])
+    @include('trip/comments', ['status' => 'complete'])
 
 
 @endsection
