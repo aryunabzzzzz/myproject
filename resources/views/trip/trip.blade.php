@@ -23,16 +23,30 @@
         </div>
     </div>
 
-    <div class="container px-4 py-5">
-        <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-            @foreach($photos as $photo)
-                <div class="card" style="...">
-                    <img src="{{asset("storage/$photo->img_path")}}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <p class="card-text">{{$photo->comment}}</p>
+
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+                @foreach($photos as $photo)
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img src="{{asset("storage/$photo->img_path")}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">{{$photo->comment}}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    </div>
+                                    <small class="text-body-secondary">{{$photo->created_at}}</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+
+            </div>
         </div>
     </div>
 
