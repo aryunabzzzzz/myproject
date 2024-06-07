@@ -6,9 +6,17 @@
 
     <h1>{{$trip->name}}</h1>
     @if($trip->users->contains(Auth::user()->id))
-        <button class="btn btn-primary rounded-pill px-3" type="button">
-            <a class="nav-link" href="/trip/{{$trip->id}}/addPhoto">Add photo</a>
-        </button>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-primary rounded-pill px-3" type="button">
+                <a class="nav-link" href="/trip/{{$trip->id}}/addPhoto">Add photo</a>
+            </button>
+            <button class="btn btn-secondary rounded-pill px-3" type="button">
+                <a class="nav-link" href="{{ route('editTrip', ['id'=>$trip->id]) }}">Edit trip</a>
+            </button>
+            <button class="btn btn-secondary rounded-pill px-3" type="button">
+                <a class="nav-link" href="#">Delete trip</a>
+            </button>
+        </div>
     @endif
 
     <hr class="featurette-divider">
@@ -19,7 +27,7 @@
             <p class="lead">{{$trip->description}}</p>
         </div>
         <div class="col-md-5 order-md-1">
-            <img src="{{asset("storage/$trip->cover_path")}}" width="500" height="500">
+            <img src="{{asset("storage/$trip->cover_path")}}" class="img-thumbnail" width="500" height="500">
         </div>
     </div>
 
@@ -36,8 +44,15 @@
                                 <p class="card-text">{{$photo->comment}}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary">View</button>
+                                        @if($trip->users->contains(Auth::user()->id))
+                                            <button type="button" class="btn btn-sm btn-outline-primary">
+                                                <a class="navbar-brand mr-auto" href="{{ route('editPhoto', ['id'=>$trip->id, 'photoId'=>$photo->id]) }}">
+                                                    Edit
+                                                </a>
+                                            </button>
+                                        @endif
+
                                     </div>
                                     <small class="text-body-secondary">{{$photo->created_at}}</small>
                                 </div>

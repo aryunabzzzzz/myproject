@@ -74,9 +74,6 @@
                 @if ($errors->has('info'))
                     <span class="text-danger">{{ $errors->first('info') }}</span>
                 @endif
-                @if ($errors->has('info'))
-                    <span class="text-danger">{{ $errors->first('info') }}</span>
-                @endif
             </div>
                 <button type="submit" class="btn btn-primary">Save changes</button>
                 <button type="button" class="btn btn-secondary"><a class="nav-link" href="{{ route('profile', ['username'=>Auth::user()->username]) }}">Cancel</a></button>

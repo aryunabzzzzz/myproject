@@ -108,4 +108,39 @@ class TripController extends Controller
         return redirect("/trip/$tripId");
     }
 
+    public function edit(int $tripId): View
+    {
+        $trip = Trip::find($tripId);
+        return view('trip/edit', ['tripId' => $tripId, 'trip' => $trip]);
+    }
+
+    public function postEdit(Request $request): RedirectResponse
+    {
+        //добавить реквест
+//        $request->validate([]);
+
+        $data = $request->all();
+        $tripId = $data['tripId'];
+        $trip = Trip::find($tripId);
+        $trip->update([
+            'name' => $data['name'],
+            'date' => $data['date'],
+            'location' => $data['location'],
+            'description' => $data['description'],
+            'status' => $data['status'],
+        ]);
+
+        $cover = $request->file('coverPath');
+
+        if ($cover) {
+            //добавить, чтобы старая обложка удалялась
+            $coverPath = $this->uploadPhoto($cover, $tripId);
+            $trip->update([
+                'cover_path' => $coverPath
+            ]);
+        }
+
+        return redirect("/trip/$tripId");
+    }
+
 }
