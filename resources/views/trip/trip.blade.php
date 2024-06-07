@@ -4,20 +4,46 @@
 @endsection
 @section('content')
 
-    <h1>{{$trip->name}}</h1>
-    @if($trip->users->contains(Auth::user()->id))
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button class="btn btn-primary rounded-pill px-3" type="button">
-                <a class="nav-link" href="/trip/{{$trip->id}}/addPhoto">Add photo</a>
-            </button>
-            <button class="btn btn-secondary rounded-pill px-3" type="button">
-                <a class="nav-link" href="{{ route('editTrip', ['id'=>$trip->id]) }}">Edit trip</a>
-            </button>
-            <button class="btn btn-secondary rounded-pill px-3" type="button">
-                <a class="nav-link" href="#">Delete trip</a>
-            </button>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>{{$trip->name}}</h1>
+            </div>
+            <div class="col">
+                @if($trip->users->contains(Auth::user()->id))
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button class="btn btn-primary rounded-pill px-3" type="button">
+                            <a class="nav-link" href="/trip/{{$trip->id}}/addPhoto">Add photo</a>
+                        </button>
+                        <button class="btn btn-secondary rounded-pill px-3" type="button">
+                            <a class="nav-link" href="{{ route('editTrip', ['id'=>$trip->id]) }}">Edit trip</a>
+                        </button>
+                        <button class="btn btn-secondary rounded-pill px-3" type="button">
+                            <a class="nav-link" href="#">Delete trip</a>
+                        </button>
+                    </div>
+                @else
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button class="btn btn-primary rounded-pill px-3" type="button">
+                            <a class="nav-link" href="{{ route('joinTrip', ['id'=>$trip->id]) }}">Join to trip</a>
+                        </button>
+                    </div>
+                @endif
+            </div>
         </div>
-    @endif
+        <div class="row">
+            <div class="col">
+                <h6>Participants</h6>
+                @foreach($trip->users as $user)
+                    <img class="rounded-circle shadow-1-strong me-3"
+                         src="{{asset("storage/$user->avatar_path")}}"
+                         height="50" width="50"
+                    />
+                @endforeach
+            </div>
+        </div>
+    </div>
+
 
     <hr class="featurette-divider">
 

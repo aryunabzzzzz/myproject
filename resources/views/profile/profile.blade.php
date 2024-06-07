@@ -4,7 +4,31 @@
 @endsection
 @section('content')
 
-    <h1>{{$user->username}}</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 style="text-align: justify">{{$user->username}}</h1>
+            </div>
+            <div class="col">
+                <div class="row ">
+                    <div class="col">
+                        <a class="navbar-brand mr-auto" href="{{ route('followers', ['username'=>$user->username]) }}"><h6 style="text-align: center">Followers</h6></a>
+                        <p style="text-align: center">{{count($user->followers)}}</p>
+                    </div>
+                    <div class="col">
+                        <a class="navbar-brand mr-auto" href="{{ route('followings', ['username'=>$user->username]) }}"><h6 style="text-align: center">Followings</h6></a>
+                        <p style="text-align: center">{{count($user->followings)}}</p>
+                    </div>
+                    <div class="col">
+                        <a class="navbar-brand mr-auto" href="{{ route('trips', ['username'=>$user->username]) }}"><h6 style="text-align: center">Trips</h6></a>
+                        <p style="text-align: center">{{count($user->trips)}}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
     <div class="container">
         <div class="row">
@@ -20,9 +44,15 @@
                 <h3>{{$user->first_name}} {{$user->last_name}}</h3>
                 <h5>gender: {{$user->gender}}</h5>
                 <h5>birthday: {{$user->birthday}}</h5>
-                <h5>country: {{$user->country}}</h5>
-                <h5>city: {{$user->city}}</h5>
-                <h5>about me: {{$user->info}}</h5>
+                @if($user->country)
+                    <h5>country: {{$user->country}}</h5>
+                @endif
+                @if($user->country)
+                    <h5>city: {{$user->city}}</h5>
+                @endif
+                @if($user->country)
+                    <h5>about me: {{$user->info}}</h5>
+                @endif
             </div>
 
             @if($user->id==Auth::user()->id)
@@ -47,6 +77,7 @@
 
         </div>
     </div>
+
 
     @include('trip/attachment', ['status' => 'complete'])
 

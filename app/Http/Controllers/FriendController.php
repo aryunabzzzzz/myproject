@@ -29,15 +29,15 @@ class FriendController extends Controller
         return redirect()->back();
     }
 
-    public function getFollowers(): View
+    public function getFollowers(string $username): View
     {
-        $user = Auth::user();
+        $user = User::where('username', $username)->firstOrFail();
         return view('profile/follower', ['user' => $user]);
     }
 
-    public function getFollowings(): View
+    public function getFollowings(string $username): View
     {
-        $user = Auth::user();
+        $user = User::where('username', $username)->firstOrFail();
         return view('profile/following', ['user' => $user]);
     }
 }

@@ -19,7 +19,7 @@ class TripController extends Controller
     {
         $user = User::where('username', $username)->firstOrFail();
         $trips = $user->trips;
-        return view('trip/trips', ['trips' => $trips]);
+        return view('trip/trips', ['trips' => $trips, 'username' => $username]);
     }
 
     public function getOne(int $id): View
@@ -141,6 +141,14 @@ class TripController extends Controller
         }
 
         return redirect("/trip/$tripId");
+    }
+
+    public function join(int $tripId): RedirectResponse
+    {
+        $user = Auth::user();
+        $user->trips()->attach($tripId);
+
+        return redirect()->back();
     }
 
 }

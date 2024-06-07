@@ -31,8 +31,17 @@ Route::post('/trips/create', [TripController::class, 'postAdd'])->name('postAddT
 
 Route::post('trip/{id}/addComment', [TripController::class, 'addComment'])->name('addComment')->middleware('auth');
 
+Route::get('/trip/{id}/edit', [TripController::class, 'edit'])->name('editTrip')->middleware('auth');
+Route::post('/trip-edit', [TripController::class, 'postEdit'])->name('postEditTrip')->middleware('auth');
+
+Route::get('trip/{id}/join', [TripController::class, 'join'])->name('joinTrip')->middleware('auth');
+
 Route::get('/trip/{id}/addPhoto', [PhotoController::class, 'add'])->name('addPhoto')->middleware('auth');
-Route::post('/trip/addPhoto', [PhotoController::class, 'postAdd'])->name('postAddPhoto')->middleware('auth');
+Route::post('/trip-addPhoto', [PhotoController::class, 'postAdd'])->name('postAddPhoto')->middleware('auth');
+
+Route::get('/trip/{id}/photo/{photoId}/edit', [PhotoController::class, 'edit'])->name('editPhoto')->middleware('auth');
+Route::post('/trip/{id}/photo-edit', [PhotoController::class, 'postEdit'])->name('postEditPhoto')->middleware('auth');
+Route::get('/trip/{id}/photo/{photoId}/delete', [PhotoController::class, 'delete'])->name('deletePhoto')->middleware('auth');
 
 Route::get('/{username}', [ProfileController::class, 'get'])->name('profile')->middleware('auth');
 
