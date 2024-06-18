@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegistrationRequest;
+use App\Jobs\WelcomeMailJob;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +54,10 @@ class AuthController extends Controller
             $user->save();
         }
 
-        return redirect("/registrationMail/$user->username");
+        $arr = array('name'=>$data['username']);
+        WelcomeMailJob::dispatch($arr, $data['email'], $data['username']);
+
+        return redirect('/login');
     }
 
     public function create(array $data)

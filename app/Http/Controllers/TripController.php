@@ -41,15 +41,18 @@ class TripController extends Controller
 
         $data = $request->all();
         $user = Auth::user();
-        $cover = $request->file('coverPath');
 
         $trip = $this->create($data);
         $trip->users()->attach($user);
 
         $tripId = $trip->id;
-        $coverPath = $this->uploadPhoto($cover, $tripId);
-        $trip->cover_path = $coverPath;
-        $trip->save();
+        $cover = $request->file('coverPath');
+
+        if ($cover) {
+            $coverPath = $this->uploadPhoto($cover, $tripId);
+            $trip->cover_path = $coverPath;
+            $trip->save();
+        }
 
         $photos = $request->file('photos');
 

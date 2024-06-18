@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FriendController;
-use App\Http\Controllers\MailController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProfileController;
@@ -11,9 +10,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'postRegister'])->name('postRegister');
-
-Route::get('/followMail/{username}', [MailController::class, 'followMail'])->name('followMail');
-Route::get('/registrationMail/{username}', [MailController::class, 'registrationMail'])->name('registrationMail');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\FollowMailJob;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,11 @@ class FriendController extends Controller
 
         Auth::user()->followings()->attach($followingId);
 
-        return redirect("/followMail/$following->username");
+        $follower = Auth::user();
+        $data = array('follower'=>"$follower->username", 'following'=>"$following->username");
+        FollowMailJob::dispatch($data, $following->email, $following->username);
+
+        return redirect()->back();
     }
 
     public function unfollow(string $username): RedirectResponse

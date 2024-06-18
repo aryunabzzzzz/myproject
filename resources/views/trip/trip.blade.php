@@ -53,7 +53,11 @@
             <p class="lead">{{$trip->description}}</p>
         </div>
         <div class="col-md-5 order-md-1">
-            <img src="{{asset("storage/$trip->cover_path")}}" class="img-thumbnail" width="500" height="500">
+            @if($trip->cover_path)
+                <img src="{{asset("storage/$trip->cover_path")}}" class="img-thumbnail" width="500" height="500">
+            @else
+                <img src="https://img.freepik.com/free-vector/flat-design-mountain-range-silhouette_23-2150491868.jpg?size=626&ext=jpg&ga=GA1.1.2116175301.1717459200&semt=ais_user" class="img-thumbnail" width="500" height="500">
+            @endif
         </div>
     </div>
 
