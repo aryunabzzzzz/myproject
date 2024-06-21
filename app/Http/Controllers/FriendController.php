@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Jobs\FollowMailJob;
 use App\Models\User;
+use App\Services\RabbitMQService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class FriendController extends Controller
@@ -17,9 +19,17 @@ class FriendController extends Controller
 
         Auth::user()->followings()->attach($followingId);
 
-        $follower = Auth::user();
-        $data = array('follower'=>"$follower->username", 'following'=>"$following->username");
-        FollowMailJob::dispatch($data, $following->email, $following->username);
+//        $follower = Auth::user();
+//        $data = array('follower'=>"$follower->username", 'following'=>"$following->username");
+//        FollowMailJob::dispatch($data, $following->email, $following->username);
+
+        $data = [
+            'followingId' => $followingId,
+            'followerId' => Auth::user()->id,
+        ];
+
+        $rabbitProducer = new RabbitMQService('follower');
+        $rabbitProducer->produce($data);
 
         return redirect()->back();
     }
