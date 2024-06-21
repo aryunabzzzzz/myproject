@@ -26,11 +26,15 @@
             <button type="button" class="btn btn-secondary"><a class="nav-link" href="/trip/{{$tripId}}">Cancel</a></button>
         </form>
     </div>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button class="btn btn-secondary me-md-2" type="button">
-            <a class="nav-link" href="{{ route('deletePhoto', ['id'=>$tripId, 'photoId'=>$photo->id]) }}">Delete photo</a>
-        </button>
-    </div>
+
+    @if($photo->trip->author_id==Auth::user()->id)
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-secondary me-md-2" type="button">
+                <a class="nav-link" href="{{ route('deletePhoto', ['id'=>$tripId, 'photoId'=>$photo->id]) }}">Delete photo</a>
+            </button>
+        </div>
+    @endif
+
 
 
 @endsection

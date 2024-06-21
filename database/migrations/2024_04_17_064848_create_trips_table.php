@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->bigIncrements('id')->primary();
+            $table->bigIncrements('author_id');
             $table->string('name');
             $table->string('date');
             $table->string('location');
             $table->text('description')->nullable();
             $table->string('status');
             $table->text('cover_path')->nullable();
+
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
         });

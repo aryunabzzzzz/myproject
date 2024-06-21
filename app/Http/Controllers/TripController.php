@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class TripController extends Controller
@@ -43,6 +44,7 @@ class TripController extends Controller
         $user = Auth::user();
 
         $trip = $this->create($data);
+
         $trip->users()->attach($user);
 
         $tripId = $trip->id;
@@ -72,7 +74,8 @@ class TripController extends Controller
             'date' => $data['date'],
             'location' => $data['location'],
             'description' => $data['description'],
-            'status' => $data['status']
+            'status' => $data['status'],
+            'author_id' => Auth::id(),
         ]);
     }
 
@@ -146,10 +149,39 @@ class TripController extends Controller
         return redirect("/trip/$tripId");
     }
 
+    public function delete(int $tripId): RedirectResponse
+    {
+        $user = Auth::user();
+        $trip = Trip::find($tripId);
+
+        if($user->id == $trip->author_id){
+            $trip->users()->detach();
+            foreach ($trip->photos as $photo) {
+                Storage::delete("$photo->img_path");
+            }
+            Storage::delete("$trip->cover_path");
+
+//            Storage::delete("photo/trip{$tripId}");
+
+            $trip->delete();
+        }
+
+        return redirect("/$user->username/trips");
+
+    }
+
     public function join(int $tripId): RedirectResponse
     {
         $user = Auth::user();
         $user->trips()->attach($tripId);
+
+        return redirect()->back();
+    }
+
+    public function leave(int $tripId): RedirectResponse
+    {
+        $user = Auth::user();
+        $user->trips()->detach($tripId);
 
         return redirect()->back();
     }

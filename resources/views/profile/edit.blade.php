@@ -38,14 +38,6 @@
                 @endif
             </div>
 
-            <label>Avatar</label>
-            <div class="input-group mb-3">
-                <input type="file" class="form-control" id="avatarPath" name="avatarPath">
-                @if ($errors->has('avatarPath'))
-                    <span class="text-danger">{{ $errors->first('avatarPath') }}</span>
-                @endif
-            </div>
-
             <label>Country</label>
             <div class="form-group mb-3">
                 <input type="text" placeholder="Country" id="country" class="form-control" name="country"

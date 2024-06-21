@@ -7,13 +7,24 @@
             @foreach($trip->comments as $comment)
 
                 <div class="d-flex flex-start">
-                    <img class="rounded-circle shadow-1-strong me-3"
-                         {{$img = $comment->author->avatar_path}}
-                         src="{{asset("storage/$img")}}"
-                         height="50" width="50"
-                    />
+                    <a class="navbar-brand mr-auto" href="{{ route('profile', ['username'=>$comment->author->username]) }}">
+                        @if($comment->author->avatar_path)
+                            <img class="rounded-circle shadow-1-strong me-3"
+                                 {{$img = $comment->author->avatar_path}}
+                                 src="{{asset("storage/$img")}}"
+                                 height="50" width="50"
+                            />
+                        @else
+                            <img class="rounded-circle shadow-1-strong me-3"
+                                 src="https://miramirov.gosuslugi.ru/netcat_files/11/143/no_foto_1.png"
+                                 height="50" width="50"
+                            />
+                        @endif
+                    </a>
                     <div>
-                        <h6 class="fw-bold mb-1">{{$comment->author->username}}</h6>
+                        <a class="navbar-brand mr-auto" href="{{ route('profile', ['username'=>$comment->author->username]) }}">
+                            <h6 class="fw-bold mb-1">{{$comment->author->username}}</h6>
+                        </a>
                         <div class="d-flex align-items-center mb-3">
                             <p class="mb-0">{{$comment->created_at}}</p>
                         </div>

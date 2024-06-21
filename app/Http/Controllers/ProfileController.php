@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -30,17 +31,35 @@ class ProfileController extends Controller
 
         $data = $request->all();
 
-        $image = $request->file('avatarPath');
-        $imagePath = $this->uploadAvatar($image);
-
-        $user = Auth::user()->update([
+        Auth::user()->update([
             'username' => $data['username'],
             'first_name' => $data['firstName'],
             'last_name' => $data['lastName'],
-            'avatar_path' => $imagePath,
             'country' => $data['country'],
             'city' => $data['city'],
             'info' => $data['info']
+        ]);
+
+        $username = Auth::user()->username;
+
+        return redirect("/$username");
+    }
+
+    public function editAvatar(string $username): View
+    {
+        $user = User::where('username', $username)->firstOrFail();
+        return view('profile/editAvatar', ['user' => $user]);
+    }
+
+    public function postEditAvatar(Request $request): RedirectResponse
+    {
+//        $request->validate([]);
+
+        $avatar = $request->file('avatarPath');
+        $avatarPath = $this->uploadAvatar($avatar);
+
+        Auth::user()->update([
+            'avatar_path' => $avatarPath
         ]);
 
         $username = Auth::user()->username;
@@ -58,7 +77,9 @@ class ProfileController extends Controller
         $oldImage = $user->avatar_path;
 
         if($file){
-            $this->deleteAvatar($oldImage);
+            if($oldImage){
+                Storage::delete($oldImage);
+            }
             $path = $file->store("avatars/user{$userId}");
         } else {
             $path = $oldImage;
@@ -66,11 +87,18 @@ class ProfileController extends Controller
         return $path;
     }
 
-    public function deleteAvatar(string $path): void
+    public function deleteAvatar(string $username): RedirectResponse
     {
+        $user = User::where('username', $username)->firstOrFail();
+        $path = $user->avatar_path;
         if ($path){
             Storage::delete($path);
         }
+
+        $user->avatar_path = null;
+        $user->save();
+
+        return redirect()->back();
     }
 
 }

@@ -10,7 +10,7 @@
                 <h1>{{$trip->name}}</h1>
             </div>
             <div class="col">
-                @if($trip->users->contains(Auth::user()->id))
+                @if($trip->author_id==Auth::user()->id)
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <button class="btn btn-primary rounded-pill px-3" type="button">
                             <a class="nav-link" href="/trip/{{$trip->id}}/addPhoto">Add photo</a>
@@ -19,7 +19,16 @@
                             <a class="nav-link" href="{{ route('editTrip', ['id'=>$trip->id]) }}">Edit trip</a>
                         </button>
                         <button class="btn btn-secondary rounded-pill px-3" type="button">
-                            <a class="nav-link" href="#">Delete trip</a>
+                            <a class="nav-link" href="{{ route('deleteTrip', ['id'=>$trip->id]) }}">Delete trip</a>
+                        </button>
+                    </div>
+                @elseif($trip->users->contains(Auth::user()->id))
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button class="btn btn-primary rounded-pill px-3" type="button">
+                            <a class="nav-link" href="/trip/{{$trip->id}}/addPhoto">Add photo</a>
+                        </button>
+                        <button class="btn btn-primary rounded-pill px-3" type="button">
+                            <a class="nav-link" href="{{ route('leaveTrip', ['id'=>$trip->id]) }}">Leave the trip</a>
                         </button>
                     </div>
                 @else
@@ -35,10 +44,13 @@
             <div class="col">
                 <h6>Participants</h6>
                 @foreach($trip->users as $user)
-                    <img class="rounded-circle shadow-1-strong me-3"
-                         src="{{asset("storage/$user->avatar_path")}}"
-                         height="50" width="50"
-                    />
+                    <a class="navbar-brand mr-auto" href="{{ route('profile', ['username'=>$user->username]) }}">
+                        @if($user->avatar_path)
+                            <img src="{{asset("storage/$user->avatar_path")}}" class="rounded-circle shadow-1-strong me-3" alt="..." height="50" width="50">
+                        @else
+                            <img src="https://miramirov.gosuslugi.ru/netcat_files/11/143/no_foto_1.png" class="rounded-circle shadow-1-strong me-3" alt="..." height="50" width="50">
+                        @endif
+                    </a>
                 @endforeach
             </div>
         </div>

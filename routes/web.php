@@ -30,7 +30,10 @@ Route::post('trip/{id}/addComment', [TripController::class, 'addComment'])->name
 Route::get('/trip/{id}/edit', [TripController::class, 'edit'])->name('editTrip')->middleware('auth');
 Route::post('/trip-edit', [TripController::class, 'postEdit'])->name('postEditTrip')->middleware('auth');
 
+Route::get('/trip/{id}/delete', [TripController::class, 'delete'])->name('deleteTrip')->middleware('auth');
+
 Route::get('trip/{id}/join', [TripController::class, 'join'])->name('joinTrip')->middleware('auth');
+Route::get('trip/{id}/leave', [TripController::class, 'leave'])->name('leaveTrip')->middleware('auth');
 
 Route::get('/trip/{id}/addPhoto', [PhotoController::class, 'add'])->name('addPhoto')->middleware('auth');
 Route::post('/trip-addPhoto', [PhotoController::class, 'postAdd'])->name('postAddPhoto')->middleware('auth');
@@ -43,6 +46,11 @@ Route::get('/{username}', [ProfileController::class, 'get'])->name('profile')->m
 
 Route::get('/{username}/edit', [ProfileController::class, 'edit'])->name('edit')->middleware('auth');
 Route::post('/{username}/edit', [ProfileController::class, 'postEdit'])->name('postEdit')->middleware('auth');
+
+Route::get('/{username}/editAvatar', [ProfileController::class, 'editAvatar'])->name('editAvatar')->middleware('auth');
+Route::post('/{username}/editAvatar', [ProfileController::class, 'postEditAvatar'])->name('postEditAvatar')->middleware('auth');
+
+Route::get('/{username}/deleteAvatar', [ProfileController::class, 'deleteAvatar'])->name('deleteAvatar')->middleware('auth');
 
 Route::get('/{username}/follow', [FriendController::class, 'follow'])->name('follow')->middleware('auth');
 Route::get('/{username}/unfollow', [FriendController::class, 'unfollow'])->name('unfollow')->middleware('auth');
