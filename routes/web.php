@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Ajax\CommentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\MainController;
@@ -57,3 +58,5 @@ Route::get('/{username}/unfollow', [FriendController::class, 'unfollow'])->name(
 
 Route::get('/{username}/followers', [FriendController::class, 'getFollowers'])->name('followers')->middleware('auth');
 Route::get('/{username}/followings', [FriendController::class, 'getFollowings'])->name('followings')->middleware('auth');
+
+Route::post('/submit-comment', [CommentController::class, 'create'])->name('submit.comment');
